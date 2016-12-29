@@ -180,12 +180,12 @@ key 要求稳定、不重复
 ```
 /****- React 起步应用
     · Hello World 示例
-  ```
+  
   npm install -g create-react-app
   create-react-app hello-world
   cd hello-world
   npm start
-  ```
+  
   ****/
   /****- React 的特点 
     · 给我们带来了组件化方式的开发体验
@@ -193,6 +193,7 @@ key 要求稳定、不重复
       1) 跨平台的界面构建能力
   ****/
   /****
+  ```
   var Counter = React.createClass({
         getInitialState: function () {
           return { count: 0 };
@@ -214,6 +215,7 @@ key 要求稳定、不重复
         <Counter />,
         document.getElementById('container')
       );
+   ```
   ****/
   
   
