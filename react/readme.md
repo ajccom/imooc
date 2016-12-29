@@ -48,10 +48,10 @@
   
 4.React Component - props & state 
   - props 的使用
-      ```
+     
       	const props = {firstName: 'Ben', lastName: 'Hector'};
       	return <Greeting {...props} />;
-    	```
+    
     · props.children 表示子组件
     · ref
   - state 的使用
