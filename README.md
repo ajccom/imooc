@@ -5,48 +5,24 @@
   <meta charset="UTF-8">
   <title>HanKe the Dog</title>
   <!--link rel="stylesheet" href="hanke.css" /-->
-</head>
-<body>
-  <div class="icon">
-    <div class="bg"></div>
-    <div class="ear left"></div>
-    <div class="ear right"></div>
-    <div class="head"></div>
-    <div class="face"></div>
-    <div class="chin"></div>
-    <div class="body"></div>
-    <div class="birthmark"></div>
-    <div class="eye">
-      <i class="upper-eyelid"></i>
-      <i class="lower-eyelid"></i>
-      <i class="pupil"></i>
-    </div>
-    <div class="eye left">
-      <i class="upper-eyelid"></i>
-      <i class="lower-eyelid"></i>
-      <i class="pupil"></i>
-    </div>
-    <div class="nose">
-      <i class="nostril"></i>
-      <i class="nostril right"></i>
-    </div>
-    <div class="mouth">
-      <i class="tongue"></i>
-      <i class="teen no11"></i>
-      <i class="teen no21"></i>
-    </div>
-  </div>
   <style>
-  :root {--hl: #1b2f90; --bg: #f9f9f6; --white: #f9f9f6; --time: 2s; --time4: calc(var(--time) * 4); --color1: #ffc400; --color2: #003bff; --color3: #e79101; --color4: #671316}
+  :root {--hl: #1b2f90; --bg: #f9f9f6; --white: #f9f9f6; --time: 2s; --time4: calc(var(--time) * 4); --color1: #ffc400; --color2: #003bff; --color3: #e79101; --color4: #671316; --gray: #ccc}
   * {margin: 0; padding: 0}
-  .icon {position: relative; width: 120px; height: 120px; margin: 30px auto;}
-  .bg {border-radius:20px; width: 120px; height: 120px; transform-origin: 50% 50%; animation: rotate var(--time4) ease-in infinite}
+  .icon {transform-origin: 50% 0; transform: scale(2.5, 2.5); position: relative; width: 120px; height: 200px; margin: 30px auto;}
+  .bg {border-radius:20px; width: 200px; margin: 0 0 0 -40px; height: 200px; transform-origin: 50% 50%; background: var(--color1); animation: rotate var(--time4) ease-in infinite}
   .ear {background: var(--hl); width: 16px; height: 70px; border-radius: 100% 70%; position: absolute; left: 90px; top: 42px; animation: rightear var(--time) ease-out infinite; transform-origin: 50% 0%;}
   .ear.left {border-radius: 70% 100%; left: 14px; top: 42px; animation: leftear var(--time) ease-out infinite}
   .head {width: 102px; height: 48px; position: absolute; left: 8px; top: 8px; background: var(--bg); border-radius: 48px 48px 3px 3px}
   .face {width: 110px; height: 68px; position: absolute; top: 30px; left: 4px; background: var(--bg); border-radius: 100%}
   .chin {width: 104px; height: 36px; position: absolute; top: 70px; left: 7px; background: var(--bg); border-radius: 52px / 0px 0px 36px 36px}
-  .body {width: 66px; height: 20px; position: absolute; top: 100px; left: 27px; background: var(--bg); border-radius: 33px / 33px 33px 0px 0px}
+  .body {width: 66px; height: 70px; position: absolute; top: 100px; left: 27px; background: var(--bg); border-radius: 33px / 33px}
+  .body .arm {width: 26px; height: 40px; position: absolute; top: 5px; left: -7px; background: var(--bg); border-radius: 26px / 26px 0 0 45px; transform: rotate(20deg);}
+  .body .arm.right {transform: scale(-1, 1) rotate(20deg); left: 47px;}
+  .body .arm:before {content: ''; position: absolute; right: 3px; top: 10px; height: 30px; width: 10px; border-radius: 10px / 10px 0 0 30px; box-shadow: -1px 0px 0px 0px rgba(0, 0, 0, 0.1);}
+  .body .leg {width: 29px; height: 50px; position: absolute; top: 36px; left: 0px; background: linear-gradient(-90deg, var(--gray) 0%, var(--bg) 20%, var(--bg) 100%); border-radius: 26px / 26px 0 26px 74px;}
+  .body .leg.right {transform: scale(-1, 1); left: 37px;}
+  .body .foot {width: 29px; height: 15px; position: absolute; bottom: -10px; left: 2px; background:  linear-gradient(227deg, var(--gray) 0%, var(--bg) 30%, var(--bg) 100%); border-radius: 15px / 20px 24px 5px 5px;}
+  .body .belly {width: 60px; height: 36px; position: absolute; bottom: 0; left: 3px; background: linear-gradient(0deg, var(--gray) 0%, var(--bg) 20%, var(--bg) 100%); border-radius: 33px / 0px 0px 35px 35px}
   .birthmark {width: 30px; height: 36px; position: absolute; top: 19px; left: 79px; background: var(--hl); border-radius: 36px / 43px 72px 0px 43px; transform: rotate(-7deg); transform-origin: 50% 100%;}
   .birthmark:before {content: ''; background: var(--bg); position: absolute; width: 25px; height: 3px; bottom: -1px; border-radius: 12px / 0px 10px 0px 0px; left: 7px;}
   .eye {width: 24px; height: 24px; position: absolute; top: 28px; left: 84px; background: var(--white); border-radius: 12px / 14px 17px 2px 10px; transform: rotate(-7deg); transform-origin: 50% 100%; overflow: hidden; box-shadow: -1px 1px 0px 0px #333 inset;}
@@ -116,16 +92,57 @@
   }
   @keyframes rotate {
     0% {background: var(--color1); transform: rotate(0deg) scale(1, 1)}
-    20% {background: var(--color1); transform: rotate(0deg) scale(.9, .9)}
+    20% {background: var(--color1); transform: rotate(0deg) scale(.95, .95)}
     25% {background: var(--color2); transform: rotate(90deg) scale(1, 1)}
-    45% {background: var(--color2); transform: rotate(90deg) scale(.9, .9)}
+    45% {background: var(--color2); transform: rotate(90deg) scale(.95, .95)}
     50% {background: var(--color3); transform: rotate(180deg) scale(1, 1)}
-    70% {background: var(--color3); transform: rotate(180deg) scale(.9, .9)}
+    70% {background: var(--color3); transform: rotate(180deg) scale(.95, .95)}
     75% {background: var(--color4); transform: rotate(270deg) scale(1, 1)}
-    95% {background: var(--color4); transform: rotate(270deg) scale(.9, .9)}
+    95% {background: var(--color4); transform: rotate(270deg) scale(.95, .95)}
     100% {background: var(--color1); transform: rotate(360deg) scale(1, 1)}
   }
   </style>
+</head>
+<body>
+  <div class="icon">
+    <div class="bg"></div>
+    <div class="ear left"></div>
+    <div class="ear right"></div>
+    <div class="head"></div>
+    <div class="face"></div>
+    <div class="chin"></div>
+    <div class="body">
+      <div class="arm"></div>
+      <div class="arm right"></div>
+      <div class="leg">
+        <div class="foot"></div>
+      </div>
+      <div class="leg right">
+        <div class="foot"></div>
+      </div>
+      <div class="belly"></div>
+    </div>
+    <div class="birthmark"></div>
+    <div class="eye">
+      <i class="upper-eyelid"></i>
+      <i class="lower-eyelid"></i>
+      <i class="pupil"></i>
+    </div>
+    <div class="eye left">
+      <i class="upper-eyelid"></i>
+      <i class="lower-eyelid"></i>
+      <i class="pupil"></i>
+    </div>
+    <div class="nose">
+      <i class="nostril"></i>
+      <i class="nostril right"></i>
+    </div>
+    <div class="mouth">
+      <i class="tongue"></i>
+      <i class="teen no11"></i>
+      <i class="teen no21"></i>
+    </div>
+  </div>
 </body>
 </html>
 ```
