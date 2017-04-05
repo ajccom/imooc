@@ -1,148 +1,434 @@
-```
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>HanKe the Dog</title>
-  <!--link rel="stylesheet" href="hanke.css" /-->
-  <style>
-  :root {--hl: #1b2f90; --bg: #f9f9f6; --white: #f9f9f6; --time: 2s; --time4: calc(var(--time) * 4); --color1: #ffc400; --color2: #003bff; --color3: #e79101; --color4: #671316; --gray: #ccc}
-  * {margin: 0; padding: 0}
-  .icon {transform-origin: 50% 0; transform: scale(2.5, 2.5); position: relative; width: 120px; height: 200px; margin: 30px auto;}
-  .bg {border-radius:20px; width: 200px; margin: 0 0 0 -40px; height: 200px; transform-origin: 50% 50%; background: var(--color1); animation: rotate var(--time4) ease-in infinite}
-  .ear {background: var(--hl); width: 16px; height: 70px; border-radius: 100% 70%; position: absolute; left: 90px; top: 42px; animation: rightear var(--time) ease-out infinite; transform-origin: 50% 0%;}
-  .ear.left {border-radius: 70% 100%; left: 14px; top: 42px; animation: leftear var(--time) ease-out infinite}
-  .head {width: 102px; height: 48px; position: absolute; left: 8px; top: 8px; background: var(--bg); border-radius: 48px 48px 3px 3px}
-  .face {width: 110px; height: 68px; position: absolute; top: 30px; left: 4px; background: var(--bg); border-radius: 100%}
-  .chin {width: 104px; height: 36px; position: absolute; top: 70px; left: 7px; background: var(--bg); border-radius: 52px / 0px 0px 36px 36px}
-  .body {width: 66px; height: 70px; position: absolute; top: 100px; left: 27px; background: var(--bg); border-radius: 33px / 33px}
-  .body .arm {width: 26px; height: 40px; position: absolute; top: 5px; left: -7px; background: var(--bg); border-radius: 26px / 26px 0 0 45px; transform: rotate(20deg);}
-  .body .arm.right {transform: scale(-1, 1) rotate(20deg); left: 47px;}
-  .body .arm:before {content: ''; position: absolute; right: 3px; top: 10px; height: 30px; width: 10px; border-radius: 10px / 10px 0 0 30px; box-shadow: -1px 0px 0px 0px rgba(0, 0, 0, 0.1);}
-  .body .leg {width: 29px; height: 50px; position: absolute; top: 36px; left: 0px; background: linear-gradient(-90deg, var(--gray) 0%, var(--bg) 20%, var(--bg) 100%); border-radius: 26px / 26px 0 26px 74px;}
-  .body .leg.right {transform: scale(-1, 1); left: 37px;}
-  .body .foot {width: 29px; height: 15px; position: absolute; bottom: -10px; left: 2px; background:  linear-gradient(227deg, var(--gray) 0%, var(--bg) 30%, var(--bg) 100%); border-radius: 15px / 20px 24px 5px 5px;}
-  .body .belly {width: 60px; height: 36px; position: absolute; bottom: 0; left: 3px; background: linear-gradient(0deg, var(--gray) 0%, var(--bg) 20%, var(--bg) 100%); border-radius: 33px / 0px 0px 35px 35px}
-  .birthmark {width: 30px; height: 36px; position: absolute; top: 19px; left: 79px; background: var(--hl); border-radius: 36px / 43px 72px 0px 43px; transform: rotate(-7deg); transform-origin: 50% 100%;}
-  .birthmark:before {content: ''; background: var(--bg); position: absolute; width: 25px; height: 3px; bottom: -1px; border-radius: 12px / 0px 10px 0px 0px; left: 7px;}
-  .eye {width: 24px; height: 24px; position: absolute; top: 28px; left: 84px; background: var(--white); border-radius: 12px / 14px 17px 2px 10px; transform: rotate(-7deg); transform-origin: 50% 100%; overflow: hidden; box-shadow: -1px 1px 0px 0px #333 inset;}
-  .lower-eyelid {background: var(--hl); position: absolute; width: 17px; height: 1px; bottom: -1px; border-radius: 13px / 0px 0px 2px 2px; left: 6px;}
-  .pupil {width: 26px; height: 26px; border-radius: 50%; position: absolute; left: -5px; bottom: -5px; background: #e79101; box-shadow: 0px 0px 4px 1px #333 inset; animation: eye var(--time) ease-out infinite;}
-  .pupil:before {content: ''; position: absolute; left: 50%; top: 50%; width: 18px; height: 18px; margin: -9px 0 0 -9px; background: #000; border-radius: 50%}
-  .pupil:after {content: ''; position: absolute; left: 17px; top: 6px; width: 5px; height: 5px; background: #fff; border-radius: 50%}
-  .eye.left {left: 13px; top: 28px; transform: rotate(7deg) scale(-1, 1); box-shadow: -1px 1px 0px 0px #333 inset, 0px -2px 4px 2px #bbb; animation: lefteye var(--time) ease-out infinite;}
-  .nose {width: 62px; height: 32px; position: absolute; top: 48px; left: 28px; background: #363035; border-radius: 31px / 12px 12px 19px 19px; z-index: 3}
-  .nose:before {content: ''; width: 60px; height: 12px; opacity: 0.8; background: linear-gradient(30deg, #fff 0%, #fff 8%, #b1aeb1 15%, #b1aeb1 50%, #544d53 100%); position: absolute; left: 1px; top: 1px; border-radius: 30px / 10px 10px 2px 2px}
-  .nostril {position: absolute; width: 15px; height: 4px; background: linear-gradient(347deg, #363035 0%, #000 50%, #000 100%); box-shadow: -1px -1px 3px 0px #363035 inset; left: 10px; top: 22px; transform: rotate(39deg); border-radius: 8px / 2px 4px 0px 2px; animation: nostril var(--time) ease-out infinite}
-  .nostril.right {transform: rotate(-39deg) scale(-1, 1); left: 37px; top: 22px}
-  .mouth {width: 68px; height: 27px; position: absolute; left: 25px; top: 72px; border-radius: 36px / 0px 0px 27px 27px; background: #671316; box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.5) inset; animation: mouth var(--time) ease-out infinite}
-  .mouth:before {content: ''; width: 72px; height: 12px; background: var(--bg); position: absolute; left: 0px; top: 0px; border-radius: 36px / 0px 0px 14px 9px; box-shadow: -1px 7px 8px 2px rgba(155,155,155, 0.2); z-index: 2; animation: lip var(--time) ease-out infinite}
-  .tongue {width: 34px; height: 14px; position: absolute; left: 50%; top: 0; margin: 0 0 0 -17px; border-radius: 17px / 0px 0px 11px 11px; background: #a2504f; box-shadow: 0px 0px 2px 0px rgba(143, 32, 33, 1) inset; animation: tongue var(--time) ease-out infinite}
-  .teen {background: var(--white)}
-  .no11, .no21 {width: 8px; height: 3px; position: absolute; left: 34px; top: 11px}
-  .no11 {margin-left: -8px; left: 33.8px; border-radius: 4px / 0 0 0 1px; border-right: .2px solid rgba(0, 0, 0, 0.5)}
-  .no21 {border-radius: 4px / 0 0 1px 0;}
+# ISC+ 后台系统接口文档
 
-  @keyframes mouth {
-    0% {height: 27px}
-    30% {height: 27px}
-    80% {height: 15px}
-    100% {height: 27px}
-  }
-  @keyframes lip {
-    0% {border-radius: 36px / 0px 0px 14px 9px;}
-    30% {border-radius: 36px / 0px 0px 14px 9px;}
-    80% {border-radius: 25px / 0px 0px 14px 9px;}
-    100% {border-radius: 36px / 0px 0px 14px 9px;}
-  }
-  @keyframes tongue {
-    0% {height: 14px}
-    30% {height: 14px}
-    80% {height: 25px}
-    100% {height: 14px}
-  }
-  @keyframes leftear {
-    0% {transform: rotate(10deg); }
-    10% {transform: rotate(10deg); }
-    80% {transform: rotate(0deg); }
-    100% {transform: rotate(10deg); }
-  }
-  @keyframes rightear {
-    0% {transform: rotate(-10deg); }
-    10% {transform: rotate(-10deg); }
-    80% {transform: rotate(0deg); }
-    100% {transform: rotate(-10deg); }
-  }
-  @keyframes eye {
-    0% {left: -5px}
-    30% {left: -5px}
-    80% {left: -8px}
-    100% {left: -5px}
-  }
-  @keyframes nostril {
-    0% {height: 4px}
-    30% {height: 4px}
-    80% {height: 3px}
-    100% {height: 4px}
-  }
-  @keyframes mask {
-    0% {left: -40px}
-    30% {left: -40px}
-    100% {left: 400px}
-  }
-  @keyframes rotate {
-    0% {background: var(--color1); transform: rotate(0deg) scale(1, 1)}
-    20% {background: var(--color1); transform: rotate(0deg) scale(.95, .95)}
-    25% {background: var(--color2); transform: rotate(90deg) scale(1, 1)}
-    45% {background: var(--color2); transform: rotate(90deg) scale(.95, .95)}
-    50% {background: var(--color3); transform: rotate(180deg) scale(1, 1)}
-    70% {background: var(--color3); transform: rotate(180deg) scale(.95, .95)}
-    75% {background: var(--color4); transform: rotate(270deg) scale(1, 1)}
-    95% {background: var(--color4); transform: rotate(270deg) scale(.95, .95)}
-    100% {background: var(--color1); transform: rotate(360deg) scale(1, 1)}
-  }
-  </style>
-</head>
-<body>
-  <div class="icon">
-    <div class="bg"></div>
-    <div class="ear left"></div>
-    <div class="ear right"></div>
-    <div class="head"></div>
-    <div class="face"></div>
-    <div class="chin"></div>
-    <div class="body">
-      <div class="arm"></div>
-      <div class="arm right"></div>
-      <div class="leg">
-        <div class="foot"></div>
-      </div>
-      <div class="leg right">
-        <div class="foot"></div>
-      </div>
-      <div class="belly"></div>
-    </div>
-    <div class="birthmark"></div>
-    <div class="eye">
-      <i class="upper-eyelid"></i>
-      <i class="lower-eyelid"></i>
-      <i class="pupil"></i>
-    </div>
-    <div class="eye left">
-      <i class="upper-eyelid"></i>
-      <i class="lower-eyelid"></i>
-      <i class="pupil"></i>
-    </div>
-    <div class="nose">
-      <i class="nostril"></i>
-      <i class="nostril right"></i>
-    </div>
-    <div class="mouth">
-      <i class="tongue"></i>
-      <i class="teen no11"></i>
-      <i class="teen no21"></i>
-    </div>
-  </div>
-</body>
-</html>
+> 接口中的“优先级”按 1 > 2 > 3 > 4 确定，1 最大，4最小，其中 3、4 级别的接口可以在下期（2017.7.1-）工作中完善。
+
+## 1. 卡片增量接口
+
+- 用途：dashboard 页展示卡片增量，返回 N 天内上传的卡片数量
+- 优先级：2
+- path: 
+- method: GET
+- query params: 
+
 ```
+day=7 // 表示请求 7 天的增量数
+```
+
+- response: 
+
+```javascript
+{
+  code: 0,
+  success: true,
+  data: {
+    count: 28  // 增量值
+  }
+}
+```
+
+## 2. 卡片引用排行榜
+
+- 用途：dashboard 页展示卡片引用排行榜
+- 优先级：3
+- path: 
+- method: GET
+- query params: 
+
+```javascript
+limit=5 // 表示接口返回被引用最高的前 5 个卡片
+```
+
+- response: 
+
+```javascript
+{
+  code: 0,
+  success: true,
+  data: {
+    rank: [ // rank 数组中的值按 top 1,2,3,4,5 依次排列
+      {
+        name: '卡片名称',
+        count: 291 // 被引用的数量
+      }, {...}, {...}, {...}, {...}
+    ]
+  }
+}
+```
+
+## 3. 我的卡片列表
+
+- 用途：我的卡片页展示卡片列表，返回按修改时间排序的数据
+- 优先级：1
+- path: 
+- method: GET
+- query params: 
+
+```javascript
+page=1 // 表示当前页面序号
+count=10 // 表示每页返回 10 条数据
+```
+
+- response: 
+
+```javascript
+{
+  code: 0,
+  success: true,
+  data: {
+    list: [
+      {
+        name: '卡片名称',
+        id: 1,
+        author: 'ISC+',
+        updateTime: '2017.4.1',
+        type: 1, // type 状态码对应卡片类型
+        category: 1, // category 状态码对应卡片分类
+        status: 1 // status 状态码对应卡片状态
+      }, {...}, {...}, {...}, {...}, {...}, {...}, {...}, {...}, {...}
+    ]
+  }
+}
+```
+
+## 4. 卡片上架请求
+
+- 用途：用户点击上架按钮后可将“已下架”卡片重新上架
+
+> 卡片未审核状态用户无法上架卡片，只有审核通过后，用户通过点击下架按钮，卡片下架后，才可能出现上架请求。
+
+- 优先级：1
+- path: 
+- method: POST
+- query params: -
+- post data:
+
+```javascript
+user: 'c00385832',
+id: 1 // 卡片 ID
+```
+
+- response: 
+
+```javascript
+{
+  code: 0,
+  success: true
+}
+```
+
+## 5. 卡片下架请求
+
+- 用途：用户点击下架按钮后可将“已上架”卡片下架
+
+- 优先级：1
+- path: 
+- method: POST
+- query params: -
+- post data:
+
+```javascript
+user: 'c00385832',
+id: 1 // 卡片 ID
+```
+
+- response: 
+
+```javascript
+{
+  code: 0,
+  success: true
+}
+```
+
+## 6. 卡片删除请求
+
+- 用途：用户点击删除按钮后可将“已下架”、“驳回” 的卡片删除
+
+- 优先级：1
+- path: 
+- method: POST
+- query params: -
+- post data:
+
+```javascript
+user: 'c00385832',
+id: 1 // 卡片 ID
+```
+
+- response: 
+
+```javascript
+{
+  code: 0,
+  success: true
+}
+```
+
+## 7. 卡片预览请求
+
+- 用途：用户点击预览按钮后可预览卡片，服务端返回卡片相关内容
+
+- 优先级：1
+- path: 
+- method: GET
+- query params: 
+
+```javascript
+user: 'c00385832',
+id: 1 // 卡片 ID
+```
+
+- response: 
+
+```javascript
+{
+  code: 0,
+  success: true,
+  data: {
+    card: {
+      ... // 卡片数据模型
+    }
+  }
+}
+```
+
+## 8. 批准卡片请求
+
+- 用途：超级 Admin 点击批准按钮后卡片从审核状态变更为上架状态
+
+- 优先级：1
+- path: 
+- method: POST
+- query params: -
+- post data:
+
+```javascript
+user: 'c00385832',
+id: 1 // 卡片 ID
+```
+
+- response: 
+
+```javascript
+{
+  code: 0,
+  success: true
+}
+```
+
+## 9. 驳回卡片请求
+
+- 用途：超级 Admin 点击驳回按钮后卡片从审核状态变更为驳回状态
+
+- 优先级：1
+- path: 
+- method: POST
+- query params: -
+- post data:
+```javascript
+user: 'c00385832',
+id: 1 // 卡片 ID
+```
+
+- response: 
+
+```javascript
+{
+  code: 0,
+  success: true
+}
+```
+
+
+## 10. 审核卡片列表
+
+- 用途：审核卡片页面列表数据展示，按卡片的提交审核时间排序
+
+- 优先级：1
+- path: 
+- method: GET
+- query params: 
+
+```javascript
+page=1 // 表示当前页面序号
+count=10 // 表示每页返回 10 条数据
+```
+
+- response: 
+
+```javascript
+{
+  code: 0,
+  success: true,
+  data: {
+    list: [
+      {
+        name: '卡片名称',
+        id: 1,
+        author: 'ISC+',
+        updateTime: '2017.4.1',
+        type: 1, // type 状态码对应卡片类型
+        category: 1, // category 状态码对应卡片分类
+        status: 1 // status 状态码对应卡片状态
+      }, {...}, {...}, {...}, {...}, {...}, {...}, {...}, {...}, {...}
+    ]
+  }
+}
+```
+
+## 11. 卡片名称检查请求
+
+- 用途：用户新建卡片时，需要检查卡片名称是否被占用
+
+- 优先级：1
+- path: 
+- method: POST
+- query params: -
+- post data:
+
+```javascript
+name: '卡片名称'
+```
+
+- response: 
+
+```javascript
+{
+  code: 0,
+  success: true,
+  data: {
+    result: true 
+  }
+}
+```
+
+## 12. 新建卡片请求
+
+- 用途：用户提交新建卡片表单
+
+- 优先级：1
+- path: 
+- method: POST
+- query params: -
+- post data:
+```javascript
+user: 'c00385832'
+name: '卡片名称'
+type: 1
+category: 1
+width: 1
+height: 1
+role: '角色1,角色2,角色3'
+data: '{...}' // 卡片的 JSON 数据,
+desc: '卡片描述信息'
+```
+
+- response: 
+
+```javascript
+{
+  code: 0,
+  success: true,
+  data: {
+    card: {...} //卡片数据模型
+  }
+}
+```
+
+## 13. 修改卡片请求
+
+- 用途：用户提交修改卡片表单
+
+- 优先级：1
+- path: 
+- method: POST
+- query params: -
+- post data:
+```javascript
+user: 'c00385832'
+id: 1
+name: '卡片名称'
+type: 1
+category: 1
+width: 1
+height: 1
+role: '角色1,角色2,角色3'
+data: '{...}' // 卡片的 JSON 数据,
+desc: '卡片描述信息'
+```
+
+- response: 
+
+```javascript
+{
+  code: 0,
+  success: true,
+  data: {
+    card: {...} //卡片数据模型
+  }
+}
+```
+
+-------------
+
+-------------
+
+-------------
+
+## 数据接口返回规则：
+
+### success
+
+```javascript
+{
+  code: 0,
+  success: true,
+  data: {...} // data 字段存放需要返回的信息，无必须信息时可省略
+}
+```
+
+### error
+
+```javascript
+{
+  code: -1,
+  success: false,
+  message: "错误信息提示语句"
+}
+```
+
+-------------
+
+-------------
+
+-------------
+
+## type 状态码
+
+type 状态码对应卡片的类型
+
+1 - 自定义
+2 - 表格
+3 - 折线图
+4 - 环形图
+5 - 柱状图
+
+## category 状态码
+
+category 状态码对应卡片的分类
+
+1 - 通用
+
+## status 状态码
+
+status 状态码对应卡片的状态
+
+1 - 
+2 - 
+3 - 
+
+-------------
+
+-------------
+
+-------------
